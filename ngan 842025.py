@@ -1,6 +1,10 @@
-a= [50, 500, 5000]
 def sum_of_squares(numbers):
-    sum = ((a[0]**2) + ((a{1]**2) + ((a[2]**2)
-    return sum
+    total = 0
+    for num in numbers:
+        total += num ** 2
+    return total
 
-print(sum_of_square(a))
+my_list = [50, 500, 5000]
+
+result = sum_of_squares(my_list)
+print("ผลบวกกำลังสองของสมาชิกใน list คือ:", result)
