@@ -1,0 +1,38 @@
+import requests
+from bs4 import BeautifulSoup
+import tkinter as tk
+
+url = "https://www.lottery.co.th/small"
+data = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+
+soup = BeautifulSoup(data.text, "html.parser")
+lottery = soup.find_all("button", class_="btn-primary")
+
+lottery_list = []
+for item in lottery:
+    lottery_list.append(item.text.strip())
+
+root = tk.Tk()
+root.title("ผลสลากกินแบ่งรัฐบาล")
+root.geometry("400x250")
+
+title_label = tk.Label(root, text="ผลสลากกินแบ่งรัฐบาล\nประจำวันที่ 1 กันยายน 2568",
+                       font=("TH Sarabun New", 18, "bold"), fg="darkblue")
+title_label.pack(pady=10)
+
+label1 = tk.Label(root, text=f"รางวัลที่ 1 : {lottery_list[0]}", font=("TH Sarabun New", 16))
+label1.pack(pady=5)
+
+label2 = tk.Label(root, text=f"เลขท้าย 2 ตัว : {lottery_list[1]}", font=("TH Sarabun New", 16))
+label2.pack(pady=5)
+
+label3 = tk.Label(root, text=f"เลขท้าย 3 ตัว : {lottery_list[2]}, {lottery_list[3]}", font=("TH Sarabun New", 16))
+label3.pack(pady=5)
+
+label4 = tk.Label(root, text=f"เลขท้าย 4 ตัว : {lottery_list[4]}, {lottery_list[5]}", font=("TH Sarabun New", 16))
+label4.pack(pady=5)
+
+exit_btn = tk.Button(root, text="ปิดโปรแกรม", command=root.quit, bg="red", fg="white")
+exit_btn.pack(pady=10)
+
+root.mainloop()
